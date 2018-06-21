@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>        
+		<script src="popup.js"></script>      
+        <meta charset="utf-8">
+        <style>
+            h1 {
+                text-align: center;
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 16px;
+            }
+            h1 a {
+                font-size: 12px;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: sans-serif;
+                width: 320px;
+                padding: 18px;
+                font-size: 12px;
+            }
+            input,select, button {
+                display: block;
+                width: 100%;
+                font-size: 14px;
+                margin: 4px 0 12px;
+                height: 26px;
+                padding: 0 8px;
+            }
+            li {
+                margin-top: 6px;
+                font-size: 12px;
+                list-style: none;
+            }
+            b {
+                font-size: 1.2em;
+            }
+        </style>  	
+    </head>
+    <body> 
+        <h1>Калькулятор растаможки <br><a target="_blank" href="http://w1.c1.rada.gov.ua/pls/zweb2/webproc4_1?pf3511=56718">(Закон №3251)</a></h1>
+        <label>
+            Курс евро к доллару:
+            <input type="text" id="coef" title="EUR/USD" value="1.15">
+        </label>   
+        <label>
+            Цена, €
+            <input type="text" id="price" title="Цена" value="5000">
+        </label>    
+        <label>
+            Объем, куб.дм.
+            <input type="text" id="vol" title="Объем (куб. см.)" value="2000">
+        </label>
+        <label>
+            Возраст, полных лет
+            <input type="number" id="age" title="Возраст (лет)" value="5">
+        </label>
+        <label>
+            Топливо
+            <select id="type" title="Топливо">
+                <option value="2" selected>Бензин</option>
+                <option value="1">Дизель</option>
+                <option value="0">Электро</option>
+            </select>
+        </label>
+        <label>
+            Страна происхождения
+            <select id="country" title="Страна происхождения">
+                <option value="0">Канада</option>
+                <option value="1">ЕС</option>
+                <option value="2" selected>Другие</option>
+            </select>
+        </label>
+        <button id="calculate">Рассчитать стоимость</button>
+        <ul>
+            <li><b>Итого: <span id="result">0</span>€</b> / $<span id="resultUsd">0</span></li>
+            <li>Таможенные платежи: <span id="resPrice">0</span>€</li>
+            <li>Ввозная пошлина: <span id="resTax">0</span>€</li>
+            <li>Акциз: <span id="resExc">0</span>€</li>
+            <li>НДС: <span id="resVat">0</span>€</li>
+        </ul>
+    </body>
+</html>
