@@ -24,13 +24,17 @@
                 padding: 18px;
                 font-size: 12px;
             }
-            input,select, button {
+            input[type=text],input[type=number],select, button {
                 display: block;
                 width: 100%;
                 font-size: 14px;
-                margin: 4px 0 12px;
+                margin-top: 4px;
                 height: 26px;
                 padding: 0 8px;
+            }
+            label {
+                display: block;
+                margin-bottom: 10px;
             }
             .half {
                 float: left;
@@ -52,20 +56,24 @@
     <body> 
         <h1>Калькулятор растаможки <br><a target="_blank" href="http://w1.c1.rada.gov.ua/pls/zweb2/webproc4_1?pf3511=56718">(Закон №3251)</a></h1>
         <label class="half">
-            Цена, €
-            <input type="text" id="price" title="Цена автомобиля в евро" value="5000">
+            Цена автомобиля:
+            <input type="number" id="price" title="Цена автомобиля (по умолчанию в евро)" value="5000">
         </label> 
         <label class="half">
             Курс евро к доллару:
-            <input type="text" id="coef" title="EUR/USD" value="1.15">
-        </label>   
+            <input type="number" id="coef" title="EUR/USD" value="1.17">
+        </label><br>  
         <label>
-            Объем, см<sup>2</sup>
-            <input type="text" id="vol" title="1000 куб.см. ~ 1L" value="2000">
+            <input type="checkbox" id="usd">
+            Цена в долларах
+        </label>
+        <label>
+            Объем двигателя, см<sup>2</sup>
+            <input type="number" id="vol" title="1000 куб.см. ~ 1L" value="2000">
         </label>
         <label>
             Возраст, полных лет
-            <input type="number" id="age" title="Количество полных лет" value="5">
+            <input type="number" id="age" title="Машины, изготовленные до 01/01/2010 не попадают под льготную растаможку!" value="5">
         </label>
         <label>
             Топливо
@@ -77,7 +85,7 @@
         </label>
         <label>
             Страна происхождения
-            <select id="country" title="Страна происхождения">
+            <select id="country" title="Страна, в которой изготовлено ТС">
                 <option value="0">Канада</option>
                 <option value="1">ЕС</option>
                 <option value="2" selected>Другие</option>

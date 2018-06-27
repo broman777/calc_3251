@@ -1,20 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var checkPageButton = document.getElementById('calculate');
-    checkPageButton.addEventListener('click', function() { 
-  var calc = {
-  	coef: parseFloat(document.getElementById("coef").value) || 1.15,
-  	vol: parseInt(document.getElementById("vol").value) || 0,
-  	price: parseFloat(document.getElementById("price").value) || 0,
-  	type: parseInt(document.getElementById("type").value),
-  	age: parseInt(document.getElementById("age").value) || 0,
-  	country: parseInt(document.getElementById("country").value)
-  };
-  result = {
-  	tax: 0,
-  	excise: 0,
-  	vat: 0,
-  	total: calc.price
-  };
+    var calculateButton = document.getElementById('calculate'),
+        usd = document.getElementById('usd');
+    usd.addEventListener('change', function(e) {
+      var price = document.getElementById("price"),
+          coef = parseFloat(document.getElementById("coef").value),
+          val = (e.target.checked) ? parseInt(price.value) * coef : parseInt(price.value) / coef;
+      price.value = parseInt(val);
+    });
+    calculateButton.addEventListener('click', function() { 
+    var calc = {
+    	coef: parseFloat(document.getElementById("coef").value),
+    	vol: parseInt(document.getElementById("vol").value) || 0,
+    	price: parseFloat(document.getElementById("price").value) || 0,
+    	type: parseInt(document.getElementById("type").value),
+    	age: parseInt(document.getElementById("age").value) || 0,
+    	country: parseInt(document.getElementById("country").value)
+    };
+    if (usd.checked) calc.price = calc.price / calc.coef;
+    
+    var result = {
+    	tax: 0,
+    	excise: 0,
+    	vat: 0,
+    	total: calc.price
+    };
+
   if (calc.type != 0) { // если бенз/дизель
 
     // рассчет акциза
@@ -45,7 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
     result.vat = (calc.vol*result.excise+result.tax+calc.price)*0.2;
   }
   result.total = result.vat+result.excise*calc.vol+result.tax;
-  result.text = '<li><b>Итого: '+Math.round(result.total+calc.price)+'€</b> / $'+Math.round((result.total+calc.price)*calc.coef)+'</li>';
+
+  result.text = '<li><b>Итого: ';
+  if (!usd.checked) result.text += Math.round(result.total+calc.price)+'€';
+  else result.text += Math.round((result.total+calc.price)*calc.coef)+'$';
+  result.text += '</b></li>';
+
   if (result.total) {
     result.text += '<li>Таможенные платежи: '+Math.round(result.total)+' €</li>';
     if (result.tax) result.text += '<li>Ввозная пошлина: '+Math.round(result.tax)+' €</li>';
