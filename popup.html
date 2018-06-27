@@ -32,6 +32,13 @@
                 height: 26px;
                 padding: 0 8px;
             }
+            .half {
+                float: left;
+                width: 48%;
+            }
+            .half:nth-child(2n) {
+                margin-right: 4%;
+            }
             li {
                 margin-top: 6px;
                 font-size: 12px;
@@ -44,21 +51,21 @@
     </head>
     <body> 
         <h1>Калькулятор растаможки <br><a target="_blank" href="http://w1.c1.rada.gov.ua/pls/zweb2/webproc4_1?pf3511=56718">(Закон №3251)</a></h1>
-        <label>
+        <label class="half">
+            Цена, €
+            <input type="text" id="price" title="Цена автомобиля в евро" value="5000">
+        </label> 
+        <label class="half">
             Курс евро к доллару:
             <input type="text" id="coef" title="EUR/USD" value="1.15">
         </label>   
         <label>
-            Цена, €
-            <input type="text" id="price" title="Цена" value="5000">
-        </label>    
-        <label>
-            Объем, куб.дм.
-            <input type="text" id="vol" title="Объем (куб. см.)" value="2000">
+            Объем, см<sup>2</sup>
+            <input type="text" id="vol" title="1000 куб.см. ~ 1L" value="2000">
         </label>
         <label>
             Возраст, полных лет
-            <input type="number" id="age" title="Возраст (лет)" value="5">
+            <input type="number" id="age" title="Количество полных лет" value="5">
         </label>
         <label>
             Топливо
@@ -77,12 +84,6 @@
             </select>
         </label>
         <button id="calculate">Рассчитать стоимость</button>
-        <ul>
-            <li><b>Итого: <span id="result">0</span>€</b> / $<span id="resultUsd">0</span></li>
-            <li>Таможенные платежи: <span id="resPrice">0</span>€</li>
-            <li>Ввозная пошлина: <span id="resTax">0</span>€</li>
-            <li>Акциз: <span id="resExc">0</span>€</li>
-            <li>НДС: <span id="resVat">0</span>€</li>
-        </ul>
+        <ul id="results"></ul>
     </body>
 </html>

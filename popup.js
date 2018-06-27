@@ -45,12 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
     result.vat = (calc.vol*result.excise+result.tax+calc.price)*0.2;
   }
   result.total = result.vat+result.excise*calc.vol+result.tax;
-  console.log(calc, result);
-  document.getElementById("result").innerText = Math.round(result.total+calc.price);
-  document.getElementById("resultUsd").innerText = Math.round((result.total+calc.price)*calc.coef);
-  document.getElementById("resPrice").innerText = Math.round(result.total);
-  document.getElementById("resTax").innerText = Math.round(result.tax);
-  document.getElementById("resExc").innerText = Math.round(result.excise*calc.vol);
-  document.getElementById("resVat").innerText = Math.round(result.vat);
+  result.text = '<li><b>Итого: '+Math.round(result.total+calc.price)+'€</b> / $'+Math.round((result.total+calc.price)*calc.coef)+'</li>';
+  if (result.total) {
+    result.text += '<li>Таможенные платежи: '+Math.round(result.total)+' €</li>';
+    if (result.tax) result.text += '<li>Ввозная пошлина: '+Math.round(result.tax)+' €</li>';
+    result.text += '<li>Акциз: '+Math.round(result.excise*calc.vol)+' €</li>';
+    result.text += '<li>НДС: '+Math.round(result.vat)+' €</li>';
+  }
+  document.getElementById("results").innerHTML = result.text;
   }, false);
 }, false);
